@@ -48,6 +48,22 @@
         font-weight: 200;
         border-left: 1px solid #d1e2ff;
       }
+      .select-all {
+        border-radius: 5px;
+        padding: 5px;
+        border: 1px solid green;
+      }
+      .select-all:hover {
+        cursor: pointer;
+      }
+      .unselect-all {
+        border-radius: 5px;
+        padding: 5px;
+        border: 1px solid green;
+      }
+      .unselect-all:hover {
+        cursor: pointer;
+      }
     </style>
     <!--
    The following is a common layout you would see in an email client.
@@ -56,6 +72,7 @@
 
   -->
     <button class="select-all">Select All</button>
+    <button class="unselect-all">Unselect All</button>
     <div class="inbox">
       <div class="item">
         <input type="checkbox" />
@@ -98,21 +115,58 @@
     <script>
       // Start - Extra from tutorial - add select all button
       const selectAllBtn = document.querySelector(".select-all");
-      const all = document.querySelectorAll("input");
+      const unSelectAllBtn = document.querySelector(".unselect-all");
+      const all = document.querySelectorAll(".inbox input[type=checkbox]");
 
       function checkAll() {
         all.forEach((input) => {
-          input.checked = !input.checked;
+          input.checked = true;
 
           // used ternary operator to check inputs are checked
-          input.checked == true
-            ? (selectAllBtn.innerHTML = "Unselect all")
-            : (selectAllBtn.innerHTML = "Select all");
+          // input.checked == true
+          //   ? (selectAllBtn.innerHTML = "Unselect All")
+          //   : (selectAllBtn.innerHTML = "Select All");
+        });
+      }
+      function uncheckAll() {
+        all.forEach((input) => {
+          input.checked = false;
         });
       }
 
       selectAllBtn.addEventListener("click", checkAll);
-      // End - Extra from tutial
+      unSelectAllBtn.addEventListener("click", uncheckAll);
+      // End - Extra from tutorial
+
+      let lastChecked;
+
+      function handleCheck(e) {
+        //check if they had shift key down
+        // and check if they are checking it
+        let inBetween = false;
+        if (e.shiftKey && this.checked) {
+          //go ahead
+          checkboxes.forEach((checkbox) => {
+            // inBetween = true;
+            console.log(checkbox);
+            if (checkbox === this || checkbox === lastChecked) {
+              inBetween = !inBetween;
+              console.log("start");
+            }
+            if (inBetween) {
+              checkbox.checked = true;
+            }
+          });
+        }
+        lastChecked = this;
+      }
+
+      const checkboxes = document.querySelectorAll(
+        ".inbox input[type=checkbox]"
+      );
+      checkboxes.forEach((checkbox) =>
+        checkbox.addEventListener("click", handleCheck)
+      );
     </script>
   </body>
 </html>
