@@ -48,27 +48,43 @@
         font-weight: 200;
         border-left: 1px solid #d1e2ff;
       }
+      .select-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+      }
       .select-all {
-        border-radius: 5px;
-        padding: 5px;
-        border: 1px solid green;
+        border-radius: 10px;
+        padding: 8px;
+        border: 2px solid black;
         transition: 0.2s ease-in;
+        margin-right: 20px;
+        font-size: 15px;
+        background-color: teal;
+        color: whitesmoke;
+      }
+      .select-all:focus {
+        outline: none;
       }
       .select-all:hover {
         cursor: pointer;
         background-color: indianred;
-        color: whitesmoke;
       }
       .unselect-all {
-        border-radius: 5px;
-        padding: 5px;
-        border: 1px solid green;
+        border-radius: 10px;
+        padding: 8px;
+        border: 2px solid black;
         transition: 0.2s ease-in;
+        font-size: 15px;
+        background-color: teal;
+        color: whitesmoke;
+      }
+      .unselect-all:focus {
+        outline: none;
       }
       .unselect-all:hover {
         cursor: pointer;
         background-color: indianred;
-        color: whitesmoke;
       }
     </style>
     <!--
@@ -77,8 +93,10 @@
    When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
 
   -->
-    <button class="select-all">Select All</button>
-    <button class="unselect-all">Unselect All</button>
+    <div class="select-buttons">
+      <button class="select-all">Select All</button>
+      <button class="unselect-all">Unselect All</button>
+    </div>
     <div class="inbox">
       <div class="item">
         <input type="checkbox" />
@@ -148,11 +166,8 @@
         if (e.shiftKey && this.checked) {
           //go ahead
           checkboxes.forEach((checkbox) => {
-            // inBetween = true;
-            console.log(checkbox);
             if (checkbox === this || checkbox === lastChecked) {
               inBetween = !inBetween;
-              console.log("start");
             }
             if (inBetween) {
               checkbox.checked = true;
