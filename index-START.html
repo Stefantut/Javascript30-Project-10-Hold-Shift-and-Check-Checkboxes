@@ -137,18 +137,18 @@
     </div>
 
     <script>
-      // Start - Extra from tutorial - add select all button
+      // Start - Extra from tutorial - added select and unselect all button
       const selectAllBtn = document.querySelector(".select-all");
       const unSelectAllBtn = document.querySelector(".unselect-all");
-      const all = document.querySelectorAll(".inbox input[type=checkbox]");
 
       function checkAll() {
-        all.forEach((input) => {
+        checkboxes.forEach((input) => {
           input.checked = true;
         });
       }
+
       function uncheckAll() {
-        all.forEach((input) => {
+        checkboxes.forEach((input) => {
           input.checked = false;
         });
       }
